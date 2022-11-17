@@ -20,6 +20,9 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV.fetch("DATABASE_USER", 'postgres') %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD", 'postgres') %>
+  host: <%= ENV.fetch("DATABASE_HOST", 'localhost') %>
 
 development:
   <<: *default
@@ -82,5 +85,3 @@ test:
 production:
   <<: *default
   database: payment_system_task_production
-  username: payment_system_task
-  password: <%= ENV["PAYMENT_SYSTEM_TASK_DATABASE_PASSWORD"] %>
