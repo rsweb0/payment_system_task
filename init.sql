@@ -1,0 +1,2 @@
+CREATE USER posgres;
+ALTER USER posgres WITH SUPERUSER;
