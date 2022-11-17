@@ -53,6 +53,8 @@ gem "bootsnap", require: false
 
 gem 'react-rails'
 
+gem "slim-rails"
+
 gem 'webpacker'
 
 group :development, :test do
