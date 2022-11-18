@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_17_122850) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_18_111815) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "active_admin_comments", force: :cascade do |t|
@@ -40,4 +41,31 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_17_122850) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "merchants", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "email"
+    t.integer "status"
+    t.float "total_transaction_sum", default: 0.0
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "transactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.float "amount"
+    t.string "status"
+    t.string "customer_email"
+    t.string "customer_phone"
+    t.string "type"
+    t.string "parent_transaction_type"
+    t.string "parent_transaction_id"
+    t.bigint "merchant_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["merchant_id"], name: "index_transactions_on_merchant_id"
+    t.index ["parent_transaction_type", "parent_transaction_id"], name: "parent_transaction_index"
+  end
+
+  add_foreign_key "transactions", "merchants"
 end

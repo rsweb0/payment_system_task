@@ -53,7 +53,11 @@ gem 'bootsnap', require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
+gem 'aasm'
+
 gem 'activeadmin'
+
+gem 'bcrypt', '~> 3.1.7'
 
 gem 'devise'
 
@@ -78,6 +82,11 @@ group :development, :test do
   gem 'faker'
 
   gem 'rspec-rails'
+end
+
+group :test do
+  gem 'database_cleaner-active_record'
+  gem 'shoulda-matchers', '~> 5.0'
 end
 
 group :development do

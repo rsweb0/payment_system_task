@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
-AdminUser.create!(email: 'admin@payment_system.com', password: 'PaymentSystem@321',
-                  password_confirmation: 'PaymentSystem@321')
+# rubocop:disable Rails/Output
+unless AdminUser.exists?
+  AdminUser.create!(email: 'admin@paymentsystem.com', password: 'payment@321',
+                    password_confirmation: 'payment@321')
+  puts 'Adminuser with email: admin@paymentsystem.com created'
+end
+
+unless Merchant.exists?
+  FactoryBot.create(:merchant, email: 'merchant1@paymentsystem.com', password: 'payment@321')
+  puts 'Merchant with email: merchant1@paymentsystem.com created'
+  FactoryBot.create(:merchant, email: 'merchant2@paymentsystem.com', password: 'payment@321')
+  puts 'Merchant with email: merchant2@paymentsystem.com created'
+end
