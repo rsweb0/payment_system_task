@@ -61,6 +61,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'devise'
 
+gem 'interactor', '~> 3.0'
+
 gem 'react-rails'
 
 gem 'sass-rails'
