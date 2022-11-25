@@ -23,6 +23,8 @@ class Transaction < ApplicationRecord
   validates :status, presence: true
   validate :parent_transaction_must_have_same_merchant
 
+  scope :recent_first, -> { order(created_at: :desc) }
+
   private
 
   def authorize_transaction?
