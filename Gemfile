@@ -69,6 +69,8 @@ gem 'react-rails'
 
 gem 'sass-rails'
 
+gem 'whenever', require: false
+
 gem 'slim-rails'
 
 gem 'webpacker'

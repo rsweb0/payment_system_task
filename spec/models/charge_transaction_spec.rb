@@ -27,7 +27,7 @@ RSpec.describe ChargeTransaction, type: :model do
   end
 
   it {
-    should have_one(:refund_transaction).dependent(:restrict_with_error).inverse_of(:parent_transaction)
+    should have_one(:refund_transaction).dependent(:destroy).inverse_of(:parent_transaction)
   }
 
   describe 'set_necessary_fields' do

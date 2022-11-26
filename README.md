@@ -1,24 +1,40 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Setup
 
-Things you may want to cover:
+  `docker-compose up -d`
 
-* Ruby version
+  `docker-compose exec app bundle exec rails db:setup`
 
-* System dependencies
+  `docker-compose down`
 
-* Configuration
+### Running
 
-* Database creation
+  `docker-compose up -d`
 
-* Database initialization
+### Stoping
 
-* How to run the test suite
+  `docker-compose down`
+### Check logs
 
-* Services (job queues, cache servers, search engines, etc.)
+  `docker-compose logs`
 
-* Deployment instructions
+### Access Bash inside docker container
 
-* ...
+  `docker run --rm -it --entrypoint bash payment_system_task_app`
+
+### Accessing Application
+
+
+  Open localhost:3000 -> Login with below credentials
+
+  `Email: merchant1@paymentsystem.com`
+
+  `Password: payment@321`
+
+### Accessing Admin panel
+
+  Open localhost:3000/admin -> Login with below credentials
+
+  `Email: admin@paymentsystem.com`
+
+  `Password: payment@321`

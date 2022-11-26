@@ -3,7 +3,7 @@
 class ChargeTransaction < Transaction
   alias authorize_transaction parent_transaction
 
-  has_one :refund_transaction, as: :parent_transaction, dependent: :restrict_with_error,
+  has_one :refund_transaction, as: :parent_transaction, dependent: :destroy,
                                inverse_of: :parent_transaction
 
   validates :amount, numericality: { greater_than: 0 }, unless: :error?

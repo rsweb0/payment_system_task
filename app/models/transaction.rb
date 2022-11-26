@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Transaction < ApplicationRecord
+  OLDER_TRANSACTION_THRESHOLD = 1.hour.freeze
+
   include AASM
 
   aasm column: :status do
@@ -29,6 +31,7 @@ class Transaction < ApplicationRecord
 
   scope :recent_first, -> { order(created_at: :desc) }
   scope :referencable_transactions, -> { approved.or(refunded) }
+  scope :older_transactions, -> { where('created_at < ?', OLDER_TRANSACTION_THRESHOLD.ago) }
 
   def authorize_transaction?
     is_a?(AuthorizeTransaction)

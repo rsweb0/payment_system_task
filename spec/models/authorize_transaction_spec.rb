@@ -20,9 +20,9 @@ RSpec.describe AuthorizeTransaction, type: :model do
   end
 
   it {
-    should have_one(:charge_transaction).dependent(:restrict_with_error).inverse_of(:parent_transaction)
+    should have_one(:charge_transaction).dependent(:destroy).inverse_of(:parent_transaction)
   }
   it {
-    should have_one(:reversal_transaction).dependent(:restrict_with_error).inverse_of(:parent_transaction)
+    should have_one(:reversal_transaction).dependent(:destroy).inverse_of(:parent_transaction)
   }
 end

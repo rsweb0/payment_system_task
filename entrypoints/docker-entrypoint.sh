@@ -2,6 +2,8 @@
 
 set -e
 
+rm -rf tmp/cache
+
 if [ -f tmp/pids/server.pid ]; then
   rm tmp/pids/server.pid
 fi
