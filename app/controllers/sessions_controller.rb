@@ -9,17 +9,14 @@ class SessionsController < ApplicationController
     merchant = Merchant.find_by(email: params[:email])
     if merchant&.authenticate(params[:password])
       session[:merchant_id] = merchant.id
-      flash[:success] = 'Login successful'
-      redirect_to root_path
+      redirect_to root_path, notice: 'Login successful'
     else
-      flash[:notice] = 'Invalid Email or Password'
-      redirect_to login_path
+      redirect_to login_path, alert: 'Invalid Email or Password'
     end
   end
 
   def destroy
     session[:merchant_id] = nil
-    flash[:notice] = 'Logged Out'
-    redirect_to '/login'
+    redirect_to login_path, notice: 'Logged Out'
   end
 end

@@ -30,7 +30,7 @@ class CreateChargeTransaction
   end
 
   def validate_transaction
-    return unless authorize_transaction.charge_transaction.exists?
+    return if authorize_transaction.charge_transaction.blank?
 
     context.fail!(errors: ['Can not charge already charged transaction!'])
   end

@@ -10,7 +10,9 @@ Rails.application.routes.draw do
 
   get 'login' => 'sessions#new', as: :login
   post 'login' => 'sessions#create'
-  get 'logout' => 'sessions#destroy', as: :logout
+  delete 'logout' => 'sessions#destroy', as: :logout
 
   resource :merchants, only: [:show]
+  resources :transactions, only: %i[new create]
+  post 'transactions/:transaction_type/:transaction_id' => 'transactions#create'
 end

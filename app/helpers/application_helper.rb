@@ -9,9 +9,7 @@ module ApplicationHelper
 
   def flash_classes
     {
-      notice: 'alert alert-danger',
-      success: 'alert alert-success',
-      error: 'alert alert-danger',
+      notice: 'alert alert-success',
       alert: 'alert alert-danger'
     }
   end

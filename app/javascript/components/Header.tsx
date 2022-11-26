@@ -11,7 +11,7 @@ const Header = ({ currentMerchant }) => {
           <Nav className="ms-auto">
             {currentMerchant ? (
               <Navbar.Text>
-                Signed in as: <a href="/logout" data-turbo-method='delete' >{currentMerchant.name}</a>
+                Signed in as: <a href="/logout" data-turbo-method="delete">{currentMerchant.name}</a>
               </Navbar.Text>
             ) : (
               <>

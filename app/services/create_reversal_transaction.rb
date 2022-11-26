@@ -31,7 +31,7 @@ class CreateReversalTransaction
   end
 
   def validate_transaction
-    return unless authorize_transaction.reversal_transaction.exists?
+    return if authorize_transaction.reversal_transaction.blank?
 
     context.fail!(errors: ['Can not reverse already reveresed transaction!'])
   end

@@ -14,6 +14,10 @@ class Transaction < ApplicationRecord
     event :refunded do
       transitions from: :approved, to: :refunded, guard: :charge_transaction?
     end
+
+    event :fail do
+      transitions from: :approved, to: :error
+    end
   end
 
   belongs_to :merchant
@@ -24,8 +28,7 @@ class Transaction < ApplicationRecord
   validate :parent_transaction_must_have_same_merchant
 
   scope :recent_first, -> { order(created_at: :desc) }
-
-  private
+  scope :referencable_transactions, -> { approved.or(refunded) }
 
   def authorize_transaction?
     is_a?(AuthorizeTransaction)
@@ -34,6 +37,8 @@ class Transaction < ApplicationRecord
   def charge_transaction?
     is_a?(ChargeTransaction)
   end
+
+  private
 
   def parent_transaction_must_have_same_merchant
     return unless parent_transaction && parent_transaction.merchant != merchant

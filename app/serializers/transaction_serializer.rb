@@ -7,15 +7,25 @@ class TransactionSerializer < ActiveModel::Serializer
              :status,
              :customer_email,
              :customer_phone,
-             :created_at
-
-  belongs_to :parent_transaction
+             :created_at,
+             :processed
 
   def created_at
     object.created_at.strftime('%d/%m/%y %H:%M')
   end
 
   def amount
-    object.amount.round(2)
+    object.amount&.round(2)
+  end
+
+  def processed
+    transactions = instance_options[:transactions]
+    if object.authorize_transaction?
+      !object.approved? || transactions.find { |t| t.parent_transaction_id == object.id }
+    elsif object.charge_transaction?
+      !object.approved?
+    else
+      true
+    end
   end
 end

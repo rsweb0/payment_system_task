@@ -31,7 +31,7 @@ class CreateRefundTransaction
   end
 
   def validate_transaction
-    return unless charge_transaction.refund_transaction.exists?
+    return if charge_transaction.refund_transaction.blank?
 
     context.fail!(errors: ['Can not refund already refunded transaction!'])
   end
